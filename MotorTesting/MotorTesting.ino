@@ -16,11 +16,11 @@ void setup() {
 
 void loop() {
   // Twist servo motor from 0 to 180
-  twistServo(servoOne, 500, 30, true);
+  twistServo(servoOne, 250, 30, true);
   delay(2000);
   
   // Twist servo motor from 180 to 0
-  twistServo(servoOne, 500, 30, false);
+  twistServo(servoOne, 250, 30, false);
   delay(2000); 
 }
 
