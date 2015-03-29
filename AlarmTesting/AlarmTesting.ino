@@ -4,11 +4,7 @@
 #define NOTE_D1  37
 #define NOTE_DS1 39
 #define NOTE_E1  41
-#define NOTE_F1  44
-#define NOTE_FS1 46
-#define NOTE_G1  49
-#define NOTE_GS1 52
-#define NOTE_A1  55
+#define NOTE_F1  44  
 #define NOTE_AS1 58
 #define NOTE_B1  62
 #define NOTE_C2  65
@@ -190,16 +186,17 @@ int underworld_tempo[] = {
  
 void setup(void)
 {
-  pinMode(3, OUTPUT);//buzzer
-  pinMode(13, OUTPUT);//led indicator when singing a note
- 
+  pinMode(3, OUTPUT);  //buzzer
+  pinMode(13, OUTPUT); // LED 
 }
+  
 void loop()
 {
   //sing the tunes
-  sing(1);
-  sing(1);
-  sing(2);
+   digitalWrite(13, HIGH);
+   sing(1);
+   sing(1);
+   sing(2);
 }
 int song = 0;
  
@@ -211,13 +208,13 @@ void sing(int s) {
     int size = sizeof(underworld_melody) / sizeof(int);
     for (int thisNote = 0; thisNote < size; thisNote++) {
  
+      
       // to calculate the note duration, take one second
       // divided by the note type.
       //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
       int noteDuration = 1000 / underworld_tempo[thisNote];
  
       buzz(melodyPin, underworld_melody[thisNote], noteDuration);
- 
       // to distinguish the notes, set a minimum time between them.
       // the note's duration + 30% seems to work well:
       int pauseBetweenNotes = noteDuration * 1.30;
@@ -265,7 +262,7 @@ void buzz(int targetPin, long frequency, long length) {
     delayMicroseconds(delayValue); // wait for the calculated delay value
     digitalWrite(targetPin, LOW); // write the buzzer pin low to pull back the diaphram
     delayMicroseconds(delayValue); // wait again or the calculated delay value
-  }
+  } 
+  
   digitalWrite(13, LOW);
- 
 }
