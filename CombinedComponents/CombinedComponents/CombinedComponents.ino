@@ -3,6 +3,7 @@
  *  detectLight()                   -- activates the photo-resistor (light detection); turns on/off gLEDa depending on external light intensity
  *  closeGarageDoor(Servo motor)    -- closes the garage door
  *  openGarageDoor(Servo motor)     -- opens the garage door
+ *  heating()                       -- manipulates AC and heating
  **/ 
 
  
@@ -112,6 +113,10 @@ int LDR = 0;              // as in A0; has to be analog
 // FOR ALARM
 int buzzer = 3;
 int rLEDa = 12;
+
+// FOR HEATING
+int gLEDb = 6;            // has to be PWM
+int rLEDb = 5;            // has to be PWM
  
 
 // --------------------- FUNCTION PROTOTYPES ---------------------
@@ -261,6 +266,10 @@ void setup(){
   // Pin assignments for Alarm
   pinMode(buzzer, OUTPUT); 
   pinMode(rLEDa, OUTPUT);   
+  
+  // Pin assignments for Heating
+  pinMode(gLEDb, OUTPUT);
+  pinMode(rLEDb, OUTPUT);
 }
  
  
@@ -287,6 +296,10 @@ void loop(){
         
         case 4:
         soundAlarm();
+        break;
+        
+        case 5:
+        heating();
         break;
         
         default:
@@ -425,3 +438,42 @@ void soundAlarm(){
    sing(1);
 }
 
+
+// ---------------------------- HEATING FUNCTION IMPLEMENTATION ---------------------------------
+
+void heating(){
+  Serial.println("Currently under heating method.");
+  while(Serial.available() == 0);
+  int input = Serial.read() - '0';
+  switch(input){
+    // -10 deg
+    case 1:
+    analogWrite(gLEDb, 0);
+    analogWrite(rLEDb, 255);
+    break;
+    
+    // 0 deg
+    case 2:
+    analogWrite(gLEDb, 0);
+    analogWrite(rLEDb, 150);
+    break;
+    
+    // 10 deg
+    case 3:
+    analogWrite(gLEDb, 50);
+    analogWrite(rLEDb, 50);
+    break;
+  
+    // 20 deg
+    case 4:
+    analogWrite(gLEDb, 150);
+    analogWrite(rLEDb, 0);
+    break;
+    
+    // 30 deg
+    case 5:
+    analogWrite(gLEDb, 255);
+    analogWrite(rLEDb, 0);
+    break;  
+  }
+}
