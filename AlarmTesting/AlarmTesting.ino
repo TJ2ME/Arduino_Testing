@@ -194,9 +194,7 @@ void loop()
 {
   //sing the tunes
    digitalWrite(13, HIGH);
-   sing(1);
-   sing(1);
-   sing(2);
+   soundAlarm();
 }
 int song = 0;
  
@@ -265,4 +263,10 @@ void buzz(int targetPin, long frequency, long length) {
   } 
   
   digitalWrite(13, LOW);
+}
+
+void soundAlarm(){
+   sing(1);
+   sing(1);
+   sing(2); 
 }

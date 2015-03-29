@@ -3,7 +3,9 @@
 Servo servoOne;
 
 // Function Prototype(s)
-void twistServo(Servo servoMotor, int delayVal);
+void twistServo(Servo servoMotor, int delayVal, int angleIncrement, bool up);
+void closeGarageDoor(Servo servoMotor);
+void openGarageDoor(Servo servoMotor);
 
 void setup() {
   // put your setup code here, to run once:
@@ -16,11 +18,11 @@ void setup() {
 
 void loop() {
   // Twist servo motor from 0 to 180
-  twistServo(servoOne, 250, 30, true);
+  openGarageDoor(servoOne);
   delay(2000);
   
   // Twist servo motor from 180 to 0
-  twistServo(servoOne, 250, 30, false);
+  closeGarageDoor(servoOne);
   delay(2000); 
 }
 
@@ -50,4 +52,12 @@ void twistServo(Servo servoMotor, int delayVal, int angleIncrement, bool up){
       delay(delayVal);
     }
   }
+}
+
+void closeGarageDoor(Servo servoMotor){
+   twistServo(servoMotor, 250, 30, false); 
+}
+
+void openGarageDoor(Servo servoMotor){
+   twistServo(servoMotor, 250, 30, true);
 }
