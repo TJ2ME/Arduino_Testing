@@ -282,6 +282,7 @@ void loop(){
         
         case 3:
         detectLight();
+        digitalWrite(gLEDa, HIGH);
         break;
         
         case 4:

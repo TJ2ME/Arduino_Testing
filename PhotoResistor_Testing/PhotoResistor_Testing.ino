@@ -1,6 +1,6 @@
 // pin assignments
-int LED = 13; 
-int LDR = 0;
+int LED = 7; 
+int LDR = 3;
 
 // global variables
 int LDRvoltage;        // placeholder for voltage of LDR 
@@ -19,6 +19,8 @@ void setup() {
 
 void loop() {
   LDRvoltage = analogRead(LDR);
+  
+  // Turns on the LED when the photoresistor detects a drop in external light intensity
   if( (regLDRvoltage - LDRvoltage) > threshold ){
     digitalWrite(LED, HIGH);
   }
